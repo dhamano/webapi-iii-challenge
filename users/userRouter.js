@@ -23,6 +23,7 @@ router.post('/:id/posts', validateUserId, validatePost, (req, res) => {
 });
 
 router.get('/', (req, res) => {
+  console.log('USERS GET');
   theDB.get()
     .then( userList => {
       if(userList.length > 0) {
@@ -110,7 +111,8 @@ function validateUser(req, res, next) {
   next();
 };
 
- function validatePost(req, res, next) {
+function validatePost(req, res, next) {
+   console.log('VALIDATE POST');
   if(Object.entries(req.body).length === 0) {
     res.status(400).json({ message: "Missing post data" })
   } else if ( !req.body.text || !req.body.text.trim() ) {
@@ -121,4 +123,3 @@ function validateUser(req, res, next) {
 };
 
 module.exports = router;
-module.exports = validatePost;
